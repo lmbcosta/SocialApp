@@ -13,6 +13,9 @@
 		490854551F93F0A90057A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 490854531F93F0A90057A87B /* LaunchScreen.storyboard */; };
 		4908545D1F93F1EC0057A87B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4908545C1F93F19F0057A87B /* GoogleService-Info.plist */; };
 		49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49277AA31F93F60C00E8F886 /* LogInVC.swift */; };
+		49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */; };
+		49923FAC1F99322F00AAF9A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAB1F99322F00AAF9A6 /* Constants.swift */; };
+		49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAD1F99463600AAF9A6 /* SignInButton.swift */; };
 		9FF758F9D3D61E13C613809A /* Pods_socialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA4A4068E86A33BD7923827 /* Pods_socialApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,10 @@
 		490854561F93F0A90057A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4908545C1F93F19F0057A87B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49277AA31F93F60C00E8F886 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSignInView.swift; sourceTree = "<group>"; };
+		49923FAB1F99322F00AAF9A6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		49923FAD1F99463600AAF9A6 /* SignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInButton.swift; sourceTree = "<group>"; };
+		49AE96E51F9FB9E60065848E /* socialApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = socialApp.entitlements; sourceTree = "<group>"; };
 		9B7A00267EE28F102DFB3420 /* Pods-socialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.release.xcconfig"; sourceTree = "<group>"; };
 		BFA4A4068E86A33BD7923827 /* Pods_socialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_socialApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD14FB500E4B00EE9FC09CA3 /* Pods-socialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +70,8 @@
 		490854491F93F0A90057A87B /* socialApp */ = {
 			isa = PBXGroup;
 			children = (
+				49AE96E51F9FB9E60065848E /* socialApp.entitlements */,
+				49923FAA1F9931D600AAF9A6 /* Utils */,
 				49277AA11F93F5B200E8F886 /* Model */,
 				49277AA01F93F5AB00E8F886 /* View */,
 				49277AA21F93F5B800E8F886 /* Controller */,
@@ -79,6 +88,8 @@
 		49277AA01F93F5AB00E8F886 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */,
+				49923FAD1F99463600AAF9A6 /* SignInButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +107,14 @@
 				49277AA31F93F60C00E8F886 /* LogInVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		49923FAA1F9931D600AAF9A6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				49923FAB1F99322F00AAF9A6 /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CE589B39A6A2E38393023973 /* Pods */ = {
@@ -151,6 +170,11 @@
 					490854461F93F0A90057A87B = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -211,9 +235,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-socialApp/Pods-socialApp-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -227,6 +255,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-socialApp/Pods-socialApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -234,6 +265,9 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -251,8 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */,
 				49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */,
+				49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */,
 				4908544B1F93F0A90057A87B /* AppDelegate.swift in Sources */,
+				49923FAC1F99322F00AAF9A6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,8 +430,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 423W5F3JD5;
 				INFOPLIST_FILE = socialApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = O;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lmbcosta.socialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -409,8 +447,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 423W5F3JD5;
 				INFOPLIST_FILE = socialApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = O;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lmbcosta.socialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
