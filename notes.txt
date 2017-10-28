@@ -1,0 +1,9 @@
+FireBase Authentication:
+1. Go to Firebase -> myApplication -> Authentication
+2. Edit Facebook Authentication
+3. Go to facebook developers -> myApplication -> Settings
+4. Fabebook: Copy App ID to Firebase App Id
+4. Facebook: Copy App Secret to Firebase App Secret
+(Do not forget to show App Secret)
+5. Firebase: Copy link below and paste in Facebook: Facebook Login -> Valid OAuth redirect URIs
+
