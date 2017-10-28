@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import FirebaseAuthUI
+import SwiftKeychainWrapper
 
 class LogInVC: UIViewController {
     
@@ -20,13 +21,13 @@ class LogInVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            performSegue(withIdentifier: "FeedVC", sender: nil)
+            print("SocialApp: Key found")
+        }
     }
     
     @IBAction func facebookBtnPressed(_ sender: Any) {
@@ -59,7 +60,12 @@ class LogInVC: UIViewController {
         // Authenticate with Firebase using email
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error == nil {
+                guard let user = user else {return}
                 print("SocialApp: Successfully authenticated with Firebase using Email")
+                // Save on key chain
+                self.saveOnKeyChain(uid: user.uid)
+                self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                
             } else {
                 guard let error = error as NSError? else {return}
                 
@@ -69,11 +75,16 @@ class LogInVC: UIViewController {
                     self.handleFirebaseError(error: error)
                 } else {
                     // If user dont exist we will create the user
+            
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
                             print("Unable to create a new User")
                         } else {
+                            guard let user = user else {return}
                             print("Successfully created a new User")
+                            // Save on key chain
+                            self.saveOnKeyChain(uid: user.uid)
+                            self.performSegue(withIdentifier: "FeedVC", sender: nil)
                         }
                     })
                 }
@@ -87,9 +98,20 @@ class LogInVC: UIViewController {
             if error != nil {
                 print("SocialApp: Unable to authenticate with Firebase")
             } else {
+                guard let user = user else {return}
                 print("SocialApp: Successfully authenticated with Firebase")
+                // Authentication successfully done
+                // Save on ios key chain using SwiftKeyChainWrapper
+                self.saveOnKeyChain(uid: user.uid)
+                self.performSegue(withIdentifier: "FeedVC", sender: nil)
             }
         }
+    }
+    
+    // Function to complete SignIn and save on ios password key chain
+    private func saveOnKeyChain(uid: String) {
+        let keyChainResult = KeychainWrapper.standard.set(uid, forKey: KEY_UID)
+        print("SocialApp: Saved on KeyChain: \(keyChainResult)")
     }
     
     // Fuction to create an Authentication alets
@@ -99,7 +121,7 @@ class LogInVC: UIViewController {
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        //self.present(alert, animated: true, completion: nil)
     }
     
     // Function to handle Firebase Authenticaton Erros

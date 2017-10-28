@@ -13,6 +13,7 @@
 		490854551F93F0A90057A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 490854531F93F0A90057A87B /* LaunchScreen.storyboard */; };
 		4908545D1F93F1EC0057A87B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4908545C1F93F19F0057A87B /* GoogleService-Info.plist */; };
 		49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49277AA31F93F60C00E8F886 /* LogInVC.swift */; };
+		492966D11FA4CBEC006FD6FF /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492966D01FA4CBEC006FD6FF /* FeedVC.swift */; };
 		49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */; };
 		49923FAC1F99322F00AAF9A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAB1F99322F00AAF9A6 /* Constants.swift */; };
 		49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAD1F99463600AAF9A6 /* SignInButton.swift */; };
@@ -28,6 +29,7 @@
 		490854561F93F0A90057A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4908545C1F93F19F0057A87B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49277AA31F93F60C00E8F886 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		492966D01FA4CBEC006FD6FF /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSignInView.swift; sourceTree = "<group>"; };
 		49923FAB1F99322F00AAF9A6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		49923FAD1F99463600AAF9A6 /* SignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInButton.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				49277AA31F93F60C00E8F886 /* LogInVC.swift */,
+				492966D01FA4CBEC006FD6FF /* FeedVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -270,6 +274,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -285,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492966D11FA4CBEC006FD6FF /* FeedVC.swift in Sources */,
 				49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */,
 				49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */,
 				49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */,
