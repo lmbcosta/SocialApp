@@ -11,8 +11,9 @@
 		490854501F93F0A90057A87B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4908544E1F93F0A90057A87B /* Main.storyboard */; };
 		490854521F93F0A90057A87B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 490854511F93F0A90057A87B /* Assets.xcassets */; };
 		490854551F93F0A90057A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 490854531F93F0A90057A87B /* LaunchScreen.storyboard */; };
-		4908545D1F93F1EC0057A87B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4908545C1F93F19F0057A87B /* GoogleService-Info.plist */; };
 		49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49277AA31F93F60C00E8F886 /* LogInVC.swift */; };
+		498E389B1FA5204500A7E19E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49FAA3A11FA51C3600FF9CBE /* GoogleService-Info.plist */; };
+		498E389D1FA5218100A7E19E /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E389C1FA5218100A7E19E /* FeedVC.swift */; };
 		49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */; };
 		49923FAC1F99322F00AAF9A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAB1F99322F00AAF9A6 /* Constants.swift */; };
 		49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923FAD1F99463600AAF9A6 /* SignInButton.swift */; };
@@ -26,12 +27,13 @@
 		490854511F93F0A90057A87B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		490854541F93F0A90057A87B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		490854561F93F0A90057A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4908545C1F93F19F0057A87B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49277AA31F93F60C00E8F886 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		498E389C1FA5218100A7E19E /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		49923FA81F9931C100AAF9A6 /* HeaderSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSignInView.swift; sourceTree = "<group>"; };
 		49923FAB1F99322F00AAF9A6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		49923FAD1F99463600AAF9A6 /* SignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInButton.swift; sourceTree = "<group>"; };
 		49AE96E51F9FB9E60065848E /* socialApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = socialApp.entitlements; sourceTree = "<group>"; };
+		49FAA3A11FA51C3600FF9CBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B7A00267EE28F102DFB3420 /* Pods-socialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.release.xcconfig"; sourceTree = "<group>"; };
 		BFA4A4068E86A33BD7923827 /* Pods_socialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_socialApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD14FB500E4B00EE9FC09CA3 /* Pods-socialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 				4908544E1F93F0A90057A87B /* Main.storyboard */,
 				490854511F93F0A90057A87B /* Assets.xcassets */,
 				490854531F93F0A90057A87B /* LaunchScreen.storyboard */,
-				4908545C1F93F19F0057A87B /* GoogleService-Info.plist */,
+				49FAA3A11FA51C3600FF9CBE /* GoogleService-Info.plist */,
 				490854561F93F0A90057A87B /* Info.plist */,
 			);
 			path = socialApp;
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				49277AA31F93F60C00E8F886 /* LogInVC.swift */,
+				498E389C1FA5218100A7E19E /* FeedVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -202,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				490854551F93F0A90057A87B /* LaunchScreen.storyboard in Resources */,
-				4908545D1F93F1EC0057A87B /* GoogleService-Info.plist in Resources */,
+				498E389B1FA5204500A7E19E /* GoogleService-Info.plist in Resources */,
 				490854521F93F0A90057A87B /* Assets.xcassets in Resources */,
 				490854501F93F0A90057A87B /* Main.storyboard in Resources */,
 			);
@@ -260,6 +263,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -270,6 +274,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -285,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498E389D1FA5218100A7E19E /* FeedVC.swift in Sources */,
 				49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */,
 				49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */,
 				49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */,
