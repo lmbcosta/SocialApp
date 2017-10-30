@@ -58,6 +58,7 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
   - GTMSessionFetcher/Core (1.1.12)
+  - IQKeyboardManagerSwift (5.0.4)
   - leveldb-library (1.18.3)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Auth
   - FirebaseUI/Facebook
+  - IQKeyboardManagerSwift (~> 5.0)
   - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
@@ -91,10 +93,11 @@ SPEC CHECKSUMS:
   FirebaseUI: 883482fea73b73bbb488c55176f4c6ad128957eb
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 5c46ce1ad97290a1a7768c343f21692178c68764
+PODFILE CHECKSUM: 7aa1a8b6f2adc87ccce12abd2862b08084953273
 
 COCOAPODS: 1.3.1

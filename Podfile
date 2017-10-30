@@ -15,4 +15,5 @@ target 'socialApp' do
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Facebook'
   pod 'SwiftKeychainWrapper'
+  pod 'IQKeyboardManagerSwift', '~> 5.0'
 end

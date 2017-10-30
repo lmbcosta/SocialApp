@@ -51,7 +51,7 @@ class LogInVC: UIViewController {
     
     @IBAction func signInBtnPressed(_ sender: Any) {
         guard let email = emailTextField.text else {
-            createAlert(titleText: "Warning", messageText: "Email field is required")
+            createAlert(titleText: "Warning", messageText: "Email field is requied")
             return
         }
         guard let password = passwordTextField.text else {
@@ -75,15 +75,23 @@ class LogInVC: UIViewController {
                 if code != 17011 {
                     self.handleFirebaseError(error: error)
                 } else {
-                    // If user dont exist we will create the user
+                    // If user dont exist we will create the a new user
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
+                            if let error = error as NSError? {
+                                self.handleFirebaseError(error: error)
+                            }
                             print("SocialAppDebug: Unable to create a new User")
                         } else {
                             guard let user = user else {return}
                             print("SocialAppDebug: Successfully created a new User")
                             self.saveOnKeyChain(uid: user.uid)
-                            self.performSegue(withIdentifier: "LoginVC", sender: nil)
+                            let alert = UIAlertController(title: "Success", message: "New user was created successfully", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (alert) in
+                                self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                            })
+                            alert.addAction(action)
+                            self.present(alert, animated: true, completion: nil)
                         }
                     })
                 }
@@ -116,7 +124,7 @@ class LogInVC: UIViewController {
     // Fuction to create an Authentication alerts
     private func createAlert(titleText: String, messageText: String) {
         let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Cancel", style: .default) { (alterAction) in
+        let action = UIAlertAction(title: "Ok", style: .default) { (alterAction) in
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
