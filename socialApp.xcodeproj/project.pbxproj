@@ -21,6 +21,8 @@
 		49979B101FA602CA00127B8E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49979B0F1FA602CA00127B8E /* CircleImage.swift */; };
 		49979B141FA604BB00127B8E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49979B131FA604BB00127B8E /* ShadowView.swift */; };
 		49979B161FA60C7400127B8E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49979B151FA60C7400127B8E /* Images.xcassets */; };
+		49E4585A1FA7CCF900D463E4 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E458591FA7CCF900D463E4 /* DataService.swift */; };
+		49FE5F1E1FB10AC7003C0EA1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE5F1D1FB10AC7003C0EA1 /* Post.swift */; };
 		9FF758F9D3D61E13C613809A /* Pods_socialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA4A4068E86A33BD7923827 /* Pods_socialApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +43,9 @@
 		49979B131FA604BB00127B8E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		49979B151FA60C7400127B8E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49AE96E51F9FB9E60065848E /* socialApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = socialApp.entitlements; sourceTree = "<group>"; };
+		49E458591FA7CCF900D463E4 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		49FAA3A11FA51C3600FF9CBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		49FE5F1D1FB10AC7003C0EA1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9B7A00267EE28F102DFB3420 /* Pods-socialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.release.xcconfig"; sourceTree = "<group>"; };
 		BFA4A4068E86A33BD7923827 /* Pods_socialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_socialApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD14FB500E4B00EE9FC09CA3 /* Pods-socialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-socialApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-socialApp/Pods-socialApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 				49277AA01F93F5AB00E8F886 /* View */,
 				49277AA21F93F5B800E8F886 /* Controller */,
 				498AAD201FA6516000F506AD /* Protocols */,
+				49E458581FA7CC9D00D463E4 /* Services */,
 				4908544A1F93F0A90057A87B /* AppDelegate.swift */,
 				4908544E1F93F0A90057A87B /* Main.storyboard */,
 				49979B151FA60C7400127B8E /* Images.xcassets */,
@@ -111,6 +116,7 @@
 		49277AA11F93F5B200E8F886 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49FE5F1D1FB10AC7003C0EA1 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +144,14 @@
 				49923FAB1F99322F00AAF9A6 /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		49E458581FA7CC9D00D463E4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				49E458591FA7CCF900D463E4 /* DataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CE589B39A6A2E38393023973 /* Pods */ = {
@@ -259,8 +273,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-socialApp/Pods-socialApp-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -315,8 +329,10 @@
 				498E389D1FA5218100A7E19E /* FeedVC.swift in Sources */,
 				498AAD221FA651C300F506AD /* Shadowble.swift in Sources */,
 				49923FAE1F99463600AAF9A6 /* SignInButton.swift in Sources */,
+				49FE5F1E1FB10AC7003C0EA1 /* Post.swift in Sources */,
 				49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */,
 				49979B101FA602CA00127B8E /* CircleImage.swift in Sources */,
+				49E4585A1FA7CCF900D463E4 /* DataService.swift in Sources */,
 				49979B141FA604BB00127B8E /* ShadowView.swift in Sources */,
 				49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */,
 				4908544B1F93F0A90057A87B /* AppDelegate.swift in Sources */,

@@ -22,7 +22,6 @@ class LogInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +44,20 @@ class LogInVC: UIViewController {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 // Authenticate with facebook using  facebook credential
                 self.firebaseAuth(credential)
+            }
+        }
+    }
+    // Sign in in Firebase using credential
+    private func firebaseAuth(_ credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if error != nil {
+                print("SocialAppDebug: Unable to authenticate with Firebase")
+            } else {
+                guard let user = user else {return}
+                print("SocialAppDebug: Successfully authenticated with Firebase")
+                self.saveOnKeyChain(uid: user.uid)
+                self.createFirebaseUser(uid: user.uid, provider: credential.provider)
+                self.performSegue(withIdentifier: "FeedVC", sender: nil)
             }
         }
     }
@@ -75,7 +88,7 @@ class LogInVC: UIViewController {
                 if code != 17011 {
                     self.handleFirebaseError(error: error)
                 } else {
-                    // If user dont exist we will create the a new user
+                    // If user doesn't exist we will create a new user
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
                             if let error = error as NSError? {
@@ -86,29 +99,18 @@ class LogInVC: UIViewController {
                             guard let user = user else {return}
                             print("SocialAppDebug: Successfully created a new User")
                             self.saveOnKeyChain(uid: user.uid)
+                            self.createFirebaseUser(uid: user.uid, provider: user.providerID)
+                            
                             let alert = UIAlertController(title: "Success", message: "New user was created successfully", preferredStyle: .alert)
                             let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (alert) in
                                 self.performSegue(withIdentifier: "FeedVC", sender: nil)
                             })
                             alert.addAction(action)
                             self.present(alert, animated: true, completion: nil)
+                            
                         }
                     })
                 }
-            }
-        }
-    }
-    
-    
-    private func firebaseAuth(_ credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
-                print("SocialAppDebug: Unable to authenticate with Firebase")
-            } else {
-                guard let user = user else {return}
-                print("SocialAppDebug: Successfully authenticated with Firebase")
-                self.saveOnKeyChain(uid: user.uid)
-                self.performSegue(withIdentifier: "FeedVC", sender: nil)
             }
         }
     }
@@ -164,4 +166,9 @@ class LogInVC: UIViewController {
         createAlert(titleText: title, messageText: text)
     }
     
+    private func createFirebaseUser(uid: String, provider: String) {
+        let userData = ["provider" : provider]
+        DataService.shared.createFirebaseUser(uid: uid, userData: userData)
+        print("SocialAppDebug: Successfully created a new Firabase user")
+    }
 }

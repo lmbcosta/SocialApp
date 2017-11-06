@@ -13,6 +13,8 @@ import SwiftKeychainWrapper
 class FeedVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var posts = [Post]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,21 @@ class FeedVC: UIViewController {
         // Delegates
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // Observe if there are changes in firebase db posts
+        DataService.shared.REF_POSTS.observe(.value) { (snapshot) in
+            if let posts = snapshot.children.allObjects as? [DataSnapshot] {
+                for post in posts {
+                    print("SocialAppDebug: \(post)")
+                    if let postDictionary = post.value as? Dictionary<String, Any> {
+                        let key = post.key
+                        let post = Post(postKey: key, postData: postDictionary)
+                        self.posts.append(post)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func signoutBtnPressed(_ sender: Any) {
@@ -38,7 +55,7 @@ class FeedVC: UIViewController {
 // MARK: - TableView DataSource and Delegate
 extension FeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return posts.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,6 +63,9 @@ extension FeedVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let post = posts[indexPath.row]
+        print("SocialAppDebug: caption -> \(post.caption)")
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell {
             return cell
         }
