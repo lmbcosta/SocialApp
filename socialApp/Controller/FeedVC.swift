@@ -23,7 +23,7 @@ class FeedVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        // Observe if there are changes in firebase db posts
+        // Observe changes in firebase db posts
         DataService.shared.REF_POSTS.observe(.value) { (snapshot) in
             if let posts = snapshot.children.allObjects as? [DataSnapshot] {
                 for post in posts {
@@ -63,10 +63,9 @@ extension FeedVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = posts[indexPath.row]
-        print("SocialAppDebug: caption -> \(post.caption)")
-        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell {
+            let post = posts[indexPath.row]
+            cell.configureCell(post: post)
             return cell
         }
         return UITableViewCell()
