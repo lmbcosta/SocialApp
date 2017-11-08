@@ -17,6 +17,8 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
+    // Image Cache
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         
         
         // Observe changes in firebase db posts
-        DataService.shared.REF_POSTS.observe(.value) { (snapshot) in
+        DataService.shared.REF_DB_POSTS.observe(.value) { (snapshot) in
             if let posts = snapshot.children.allObjects as? [DataSnapshot] {
                 for post in posts {
                     print("SocialAppDebug: \(post)")
@@ -82,7 +84,9 @@ extension FeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell {
             let post = posts[indexPath.row]
-            cell.configureCell(post: post)
+            // Check if image is in cache
+            let image : UIImage? = FeedVC.imageCache.object(forKey: post.imageUrl as NSString)
+            cell.configureCell(post: post, image: image)
             return cell
         }
         return UITableViewCell()

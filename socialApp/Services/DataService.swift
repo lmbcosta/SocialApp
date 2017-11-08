@@ -9,40 +9,62 @@
 import Foundation
 import Firebase
 
-
-let DB_BASE = Database.database().reference()
-
 class DataService {
     
     static let shared = DataService()
     
-    private var _REF_BASE: DatabaseReference
-    private var _REF_POSTS: DatabaseReference
-    private var _REF_USERS: DatabaseReference
+    // Data base references
+    private var _REF_DB_BASE: DatabaseReference
+    private var _REF_DB_POSTS: DatabaseReference
+    private var _REF_DB_USERS: DatabaseReference
+    
+    // Storage base references
+    private var _REF_STORAGE_BASE: StorageReference
+    private var _REF_STORAGE_POST_IMAGES: StorageReference
+    private var _REF_STORAGE_PROFILE_IMAGES: StorageReference
+    
     
     private init() {
-        _REF_BASE = Database.database().reference()
-        _REF_USERS = _REF_BASE.child("users")
-        _REF_POSTS = _REF_BASE.child("posts")
+        // Database References
+        _REF_DB_BASE = Database.database().reference()
+        _REF_DB_USERS = _REF_DB_BASE.child("users")
+        _REF_DB_POSTS = _REF_DB_BASE.child("posts")
+        
+        // Storage References
+        _REF_STORAGE_BASE = Storage.storage().reference()
+        _REF_STORAGE_POST_IMAGES = _REF_STORAGE_BASE.child("post-images")
+        _REF_STORAGE_PROFILE_IMAGES = _REF_STORAGE_BASE.child("profile-images")
     }
     
-    var REF_BASE: DatabaseReference {
-        return _REF_BASE
+    var REF_DB_BASE: DatabaseReference {
+        return _REF_DB_BASE
     }
     
-    var REF_POSTS: DatabaseReference {
-        return _REF_POSTS
+    var REF_DB_POSTS: DatabaseReference {
+        return _REF_DB_POSTS
     }
     
-    var REF_USERS: DatabaseReference {
-        return _REF_USERS
+    var REF_DB_USERS: DatabaseReference {
+        return _REF_DB_USERS
+    }
+    
+    var REF_STORAGE_BASE: StorageReference {
+        return _REF_STORAGE_BASE
+    }
+    
+    var REF_STORAGE_POST_IMAGES: StorageReference {
+        return _REF_STORAGE_POST_IMAGES
+    }
+    
+    var REF_STORAGE_PROFILE_IMAGES: StorageReference {
+        return _REF_STORAGE_PROFILE_IMAGES
     }
     
     func createFirebaseUser(uid: String, userData: Dictionary<String, String>) {
-        REF_USERS.child(uid).updateChildValues(userData)
+        _REF_DB_USERS.child(uid).updateChildValues(userData)
     }
     
     func createFirebasePost(pid: String, postData: Dictionary<String, String>) {
-        REF_POSTS.child(pid).updateChildValues(postData)
+        _REF_DB_POSTS.child(pid).updateChildValues(postData)
     }
 }
