@@ -211,12 +211,16 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ymn-iW-kC1">
                                         <rect key="frame" x="8" y="8" width="288" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-social-network-logo-of-photo-camera" translatesAutoresizingMaskIntoConstraints="NO" id="xim-RV-y9k" customClass="CircleImage" customModule="socialApp" customModuleProvider="target">
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram-social-network-logo-of-photo-camera" translatesAutoresizingMaskIntoConstraints="NO" id="xim-RV-y9k" customClass="CircleImage" customModule="socialApp" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="gmD-OM-It6"/>
                                                     <constraint firstAttribute="height" constant="40" id="lGz-dk-aEP"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="RgG-4v-WRF" appends="YES" id="t2x-j9-xFV"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xjw-S2-gQ2">
                                                 <rect key="frame" x="48" y="0.0" width="192" height="40"/>
@@ -385,10 +389,16 @@
                         <viewLayoutGuide key="safeArea" id="c6V-IT-EvF"/>
                     </view>
                     <connections>
+                        <outlet property="imageAdder" destination="xim-RV-y9k" id="6cu-DQ-fAA"/>
                         <outlet property="tableView" destination="Xln-hY-us2" id="7Uf-3q-Ik8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3S-31-wKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RgG-4v-WRF">
+                    <connections>
+                        <action selector="addImageButton:" destination="1Va-hT-egU" id="sR1-x5-Wwg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1070.625" y="128.87323943661971"/>
         </scene>

@@ -10,11 +10,13 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController {
+class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var imageAdder: CircleImage!
     
     var posts = [Post]()
+    var imagePicker: UIImagePickerController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,12 @@ class FeedVC: UIViewController {
         // Delegates
         tableView.dataSource = self
         tableView.delegate = self
+        
+        imagePicker = UIImagePickerController()
+        // User can edit choosed images
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
         
         // Observe changes in firebase db posts
         DataService.shared.REF_POSTS.observe(.value) { (snapshot) in
@@ -39,6 +47,7 @@ class FeedVC: UIViewController {
         }
     }
     
+    // Sigout Button
     @IBAction func signoutBtnPressed(_ sender: Any) {
         // 1. Signout Firebase
         try! Auth.auth().signOut()
@@ -50,9 +59,17 @@ class FeedVC: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
+    
+    // Add photo Button
+    @IBAction func addImageButton(_ sender: Any) {
+        // Present image view picker
+        self.present(imagePicker, animated: true, completion: nil)
+        // DONT FORGET ENABLE USER INTERACTION!!!
+    }
+    
 }
 
-// MARK: - TableView DataSource and Delegate
+// MARK: - TableView DataSource
 extension FeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -72,6 +89,7 @@ extension FeedVC: UITableViewDataSource {
     }
 }
 
+// MARK: - TableView Delegate
 extension FeedVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
@@ -79,4 +97,20 @@ extension FeedVC: UITableViewDelegate {
         return 300.0
     }
 }
+
+// MARK: - UIImagePickerControllerDelegate
+extension FeedVC: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imageAdder.image = image
+            imageAdder.clipsToBounds = true
+        } else {
+            print("SocialAppDebug: Selected image was not added")
+        }
+        
+        // Close image picker
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+}
+
 
