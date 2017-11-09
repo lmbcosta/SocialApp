@@ -38,10 +38,10 @@ class PostCell: UITableViewCell {
                     if let img = UIImage(data: data) {
                         // Save in cache and use as key image url
                         FeedVC.imageCache.setObject(img, forKey: post.imageUrl as NSString)
+                        self.postImage.image = img
                     }
                 }
             })
-            
         }
     }
 }

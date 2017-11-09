@@ -14,11 +14,16 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageAdder: CircleImage!
+    @IBOutlet weak var captionField: UITextField!
+    
     
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
     // Image Cache
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
+    // To only download the selected image on imagePicker
+    // rather then phtologo we use a flag
+    var isImageSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +54,8 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    // MARK: - Actions
+    
     // Sigout Button
     @IBAction func signoutBtnPressed(_ sender: Any) {
         // 1. Signout Firebase
@@ -67,6 +74,40 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         // Present image view picker
         self.present(imagePicker, animated: true, completion: nil)
         // DONT FORGET ENABLE USER INTERACTION!!!
+    }
+    
+    // New post button
+    @IBAction func newPostBtnPressed(_ sender: Any) {
+        
+        guard let caption = captionField.text, caption != "" else {
+            print("SocialAppDebug: A Caption must be entered")
+            return
+        }
+        
+        guard let image = imageAdder.image, isImageSelected else {
+            print("SocialAppDebug: An image must be entered")
+            return
+        }
+        
+        // Convert image to imagaData
+        if let imageData = UIImageJPEGRepresentation(image, 0.2) {
+            // Get unique identifier to identify image
+            let imgUid = UUID().uuidString
+            // Data Type jpeg
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/jpeg"
+            // Upload
+            DataService.shared.REF_STORAGE_POST_IMAGES.child(imgUid).putData(imageData, metadata: metaData, completion: { (metaData, error) in
+                if error != nil {
+                    print("SocialAppDebug: Error uploading image")
+                } else {
+                    print("SocialAppDebug: Image successfully uploaded")
+                    let downloadUrl = metaData?.downloadURL()?.absoluteString
+                }
+            })
+        }
+        
+        
     }
     
 }
@@ -108,6 +149,7 @@ extension FeedVC: UIImagePickerControllerDelegate {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageAdder.image = image
             imageAdder.clipsToBounds = true
+            isImageSelected = true
         } else {
             print("SocialAppDebug: Selected image was not added")
         }
