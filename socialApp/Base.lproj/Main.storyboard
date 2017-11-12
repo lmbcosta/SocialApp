@@ -201,6 +201,7 @@
                                 <constraints>
                                     <constraint firstItem="X3z-Hr-SIl" firstAttribute="centerX" secondItem="zPn-TO-zBU" secondAttribute="centerX" constant="14" id="05X-e1-DWG"/>
                                     <constraint firstItem="sTg-iT-Ps7" firstAttribute="top" secondItem="zPn-TO-zBU" secondAttribute="top" constant="24" id="IJD-Xn-q26"/>
+                                    <constraint firstAttribute="height" constant="75" id="WIi-Cq-qy5"/>
                                     <constraint firstItem="X3z-Hr-SIl" firstAttribute="centerY" secondItem="sTg-iT-Ps7" secondAttribute="centerY" id="ate-9B-7Wg"/>
                                     <constraint firstItem="sTg-iT-Ps7" firstAttribute="leading" secondItem="zPn-TO-zBU" secondAttribute="leading" constant="8" id="bn2-Um-8km"/>
                                 </constraints>

@@ -24,7 +24,8 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     // To only download the selected image on imagePicker
     // rather then phtologo we use a flag
     var isImageSelected = false
-
+    
+    // MARK: - View stages
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,11 +82,13 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         
         guard let caption = captionField.text, caption != "" else {
             print("SocialAppDebug: A Caption must be entered")
+            // Handle with alert
             return
         }
         
         guard let image = imageAdder.image, isImageSelected else {
             print("SocialAppDebug: An image must be entered")
+            // Handle with alert
             return
         }
         
@@ -99,15 +102,36 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
             // Upload
             DataService.shared.REF_STORAGE_POST_IMAGES.child(imgUid).putData(imageData, metadata: metaData, completion: { (metaData, error) in
                 if error != nil {
+                    // Handle with alert
                     print("SocialAppDebug: Error uploading image")
                 } else {
                     print("SocialAppDebug: Image successfully uploaded")
-                    let downloadUrl = metaData?.downloadURL()?.absoluteString
+                    //let downloadUrl = metaData?.downloadURL()?.absoluteString
+                    if let downloadUrl = metaData?.downloadURL()?.absoluteString {
+                        self.postToFirebase(imgUrl: downloadUrl, caption: caption)
+                    }
                 }
             })
         }
+    }
+    
+    // MARK: - Private functions
+    private func postToFirebase(imgUrl: String, caption: String) {
+        let post: Dictionary<String, Any> = [
+            "caption": caption,
+            "imageUrl": imgUrl,
+            "likes": 0
+        ]
+        DataService.shared.REF_DB_POSTS.childByAutoId().setValue(post)
         
+        // Clear properties
+        captionField.text = ""
+        isImageSelected = false
+        imageAdder.image = UIImage(named: "instagram-social-network-logo-of-photo-camera")
+        imageAdder.clipsToBounds = false
         
+        // Reload table view
+        tableView.reloadData()
     }
     
 }
