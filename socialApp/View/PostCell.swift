@@ -19,7 +19,20 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var numberOfLikesLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
     
-    func configureCell(post: Post, image: UIImage?) {
+    var post: Post!
+    var userLikesPostReference: DatabaseReference!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
+        tap.numberOfTapsRequired = 1
+        likeImage.addGestureRecognizer(tap)
+        likeImage.isUserInteractionEnabled = true
+    }
+    
+    func configureCell(post: Post, image: UIImage? = nil) {
+        self.post = post
         numberOfLikesLabel.text = "\(post.likes)"
         postTextView.text = post.caption
         
@@ -43,5 +56,42 @@ class PostCell: UITableViewCell {
                 }
             })
         }
+        
+        // Likes
+        userLikesPostReference = DataService.shared.REF_DB_CURRENT_USER.child("likes").child(post.postKey)
+        userLikesPostReference.observeSingleEvent(of: .value) { snapshot in
+            if let _ = snapshot.value as? NSNull {
+                self.likeImage.image = UIImage(named: "like-5")
+            } else {
+                self.likeImage.image = UIImage(named: "like-1")
+            }
+        }
+    }
+    
+    @objc func likeTapped() {
+        userLikesPostReference.observeSingleEvent(of: .value) { snapshot in
+            //print("SocialAppDebug: esta merda... \(snapshot.value)")
+            if let _ = snapshot.value as? NSNull {
+                self.likeImage.image = UIImage(named: "like-1")
+                self.post.adjustLikes(addLike: true)
+                self.userLikesPostReference.setValue("true")
+                print("SocialAppDebug: like+")
+            } else {
+                self.likeImage.image = UIImage(named: "like-5")
+                self.post.adjustLikes(addLike: false)
+                self.userLikesPostReference.removeValue()
+                print("SocialAppDebug: like-")
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -323,7 +323,7 @@
                                                                 <constraint firstAttribute="height" constant="24" id="JY7-ha-6gN"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="HZa-0M-zIE">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HZa-0M-zIE">
                                                             <rect key="frame" x="4" y="76" width="288" height="116"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="116" id="hZn-Cq-yoc"/>
@@ -414,7 +414,6 @@
         <image name="instagram-social-network-logo-of-photo-camera" width="512" height="512"/>
         <image name="like-5" width="32" height="32"/>
         <image name="loginfacebook" width="525" height="96"/>
-        <image name="main" width="1024" height="768"/>
         <image name="post-it-4" width="32" height="32"/>
         <image name="thumb" width="768" height="1024"/>
     </resources>

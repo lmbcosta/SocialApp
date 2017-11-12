@@ -42,16 +42,19 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         // Observe changes in firebase db posts
         DataService.shared.REF_DB_POSTS.observe(.value) { (snapshot) in
             if let posts = snapshot.children.allObjects as? [DataSnapshot] {
+                var newPosts = [Post]()
                 for post in posts {
-                    print("SocialAppDebug: \(post)")
+                    //print("SocialAppDebug: \(post)")
                     if let postDictionary = post.value as? Dictionary<String, Any> {
                         let key = post.key
                         let post = Post(postKey: key, postData: postDictionary)
-                        self.posts.append(post)
+                        newPosts.append(post)
                     }
                 }
+                self.posts = newPosts.reversed()
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+            
         }
     }
     
@@ -150,8 +153,12 @@ extension FeedVC: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell {
             let post = posts[indexPath.row]
             // Check if image is in cache
-            let image : UIImage? = FeedVC.imageCache.object(forKey: post.imageUrl as NSString)
-            cell.configureCell(post: post, image: image)
+            if let image = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
+                print("Image alredy in cache")
+                cell.configureCell(post: post, image: image)
+            } else {
+                cell.configureCell(post: post)
+            }
             return cell
         }
         return UITableViewCell()
@@ -160,8 +167,6 @@ extension FeedVC: UITableViewDataSource {
 
 // MARK: - TableView Delegate
 extension FeedVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300.0
     }
