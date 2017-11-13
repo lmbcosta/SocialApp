@@ -168,7 +168,7 @@ extension FeedVC: UITableViewDataSource {
 // MARK: - TableView Delegate
 extension FeedVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300.0
+        return 430
     }
 }
 
