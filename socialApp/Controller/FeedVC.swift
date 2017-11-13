@@ -118,6 +118,11 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    @IBAction func settingsBtnTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: "FeedToSettings", sender: nil)
+    }
+    
+    
     // MARK: - Private functions
     private func postToFirebase(imgUrl: String, caption: String) {
         let post: Dictionary<String, Any> = [
