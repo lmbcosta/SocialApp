@@ -70,14 +70,15 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         if removeSuccessful {
             print("SocialAppDebug: Remove seccessfully from Key Chain")
         }
-        dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "FeedToLogin", sender: nil)
     }
     
     // Add photo Button
     @IBAction func addImageButton(_ sender: Any) {
         // Present image view picker
         self.present(imagePicker, animated: true, completion: nil)
-        // DONT FORGET ENABLE USER INTERACTION!!!
+        // DONT FORGET ENABLE USER INTERACTION
+        // THE OPTION IS IN OBJECT THAT WE ADD GESTURE TAP RECOGNIZER
     }
     
     // New post button
@@ -119,7 +120,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func settingsBtnTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: "FeedToSettings", sender: nil)
+        self.performSegue(withIdentifier: "FeedToSettings", sender: self)
     }
     
     

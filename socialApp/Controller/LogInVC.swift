@@ -27,7 +27,7 @@ class LogInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Check if user already exist
         if let _ = KeychainWrapper.standard.string(forKey: KEY_USER) {
-            performSegue(withIdentifier: "FeedVC", sender: nil)
+            performSegue(withIdentifier: "LoginToFeed", sender: nil)
         }
     }
     
@@ -57,7 +57,7 @@ class LogInVC: UIViewController {
                 print("SocialAppDebug: Successfully authenticated with Firebase")
                 self.saveOnKeyChain(uid: user.uid)
                 self.createFirebaseUser(uid: user.uid, provider: credential.provider)
-                self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                self.performSegue(withIdentifier: "LoginToFeed", sender: nil)
             }
         }
     }
@@ -78,7 +78,7 @@ class LogInVC: UIViewController {
                 print("SocialAppDebug: Successfully authenticated with Firebase using Email")
                 guard let user = user else {return}
                 self.saveOnKeyChain(uid: user.uid)
-                self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                self.performSegue(withIdentifier: "LogintoFeed", sender: nil)
                 
             } else {
                 guard let error = error as NSError? else {return}
@@ -103,7 +103,7 @@ class LogInVC: UIViewController {
                             
                             let alert = UIAlertController(title: "Success", message: "New user was created successfully", preferredStyle: .alert)
                             let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (alert) in
-                                self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                                self.performSegue(withIdentifier: "LoginToSettings", sender: nil)
                             })
                             alert.addAction(action)
                             self.present(alert, animated: true, completion: nil)

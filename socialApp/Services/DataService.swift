@@ -74,4 +74,19 @@ class DataService {
     func createFirebasePost(pid: String, postData: Dictionary<String, String>) {
         _REF_DB_POSTS.child(pid).updateChildValues(postData)
     }
+    
+    func saveCurrentUserSettings(username: String, imageProfileUrl: String) {
+        // Save profileUrl in current user
+        REF_DB_CURRENT_USER.child("profileImage").setValue(imageProfileUrl)
+        // Save username in currentUser
+        REF_DB_CURRENT_USER.child("username").setValue(username)
+    }
+    
+    func uploadCurrentUserSetings() -> (username: String?, imageProfileUrl: String?) {
+        // Get username
+        let username = REF_DB_CURRENT_USER.value(forKey: "username") as? String
+        let imageProfileUrl = REF_DB_CURRENT_USER.value(forKey: "profileImage") as? String
+        
+        return (username, imageProfileUrl)
+    }
 }
