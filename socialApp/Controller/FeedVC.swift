@@ -66,7 +66,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         try! Auth.auth().signOut()
         
         // 2. Remove user from key chain
-        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: KEY_USER)
+        let removeSuccessful: Bool = KeychainWrapper.standard.removeObject(forKey: DataSession.shared.keyUser)
         if removeSuccessful {
             print("SocialAppDebug: Remove seccessfully from Key Chain")
         }

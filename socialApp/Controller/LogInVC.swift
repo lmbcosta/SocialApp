@@ -26,7 +26,7 @@ class LogInVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         // Check if user already exist
-        if let _ = KeychainWrapper.standard.string(forKey: KEY_USER) {
+        if let _ = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser) {
             performSegue(withIdentifier: "LoginToFeed", sender: nil)
         }
     }
@@ -117,7 +117,7 @@ class LogInVC: UIViewController {
     
     // Function to save user password on key chain
     private func saveOnKeyChain(uid: String) {
-        let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: KEY_USER)
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(uid, forKey: DataSession.shared.keyUser)
         if saveSuccessful {
             print("SocialAppDebug: Save successfully on key chain")
         }
