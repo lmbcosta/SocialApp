@@ -11,4 +11,5 @@ import UIKit
 
 
 let SHADOW_GRAY: CGFloat = 120.0 / 255.0
-
+let USER_DEFAULT_IMAGE = "user_default"
+let USERNAME_PLACEHOLDER = "Insert your username"

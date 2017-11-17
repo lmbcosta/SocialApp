@@ -214,7 +214,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-icon-32327" translatesAutoresizingMaskIntoConstraints="NO" id="1x9-rf-tZZ" customClass="CircleImage" customModule="socialApp" customModuleProvider="target">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1x9-rf-tZZ" customClass="CircleImage" customModule="socialApp" customModuleProvider="target">
                                 <rect key="frame" x="75" y="180" width="170" height="170"/>
                                 <color key="backgroundColor" red="0.31372549020000001" green="0.41176470590000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -226,7 +226,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Qde-Pd-Hci" appends="YES" id="mx3-QF-hBG"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8y-7k-Jww">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8y-7k-Jww">
                                 <rect key="frame" x="59" y="432" width="201" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="201" id="PEX-Yl-N82"/>
@@ -590,7 +590,6 @@
         <image name="post-it-4" width="32" height="32"/>
         <image name="settings" width="512" height="512"/>
         <image name="thumb" width="768" height="1024"/>
-        <image name="user-icon-32327" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="H2U-lc-Wi2"/>

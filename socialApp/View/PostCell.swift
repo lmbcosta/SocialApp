@@ -70,7 +70,6 @@ class PostCell: UITableViewCell {
     
     @objc func likeTapped() {
         userLikesPostReference.observeSingleEvent(of: .value) { snapshot in
-            //print("SocialAppDebug: esta merda... \(snapshot.value)")
             if let _ = snapshot.value as? NSNull {
                 self.likeImage.image = UIImage(named: "like-1")
                 self.post.adjustLikes(addLike: true)

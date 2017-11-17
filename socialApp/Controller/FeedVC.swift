@@ -38,7 +38,6 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         
-        
         // Observe changes in firebase db posts
         DataService.shared.REF_DB_POSTS.observe(.value) { (snapshot) in
             if let posts = snapshot.children.allObjects as? [DataSnapshot] {
@@ -70,6 +69,11 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         if removeSuccessful {
             print("SocialAppDebug: Remove seccessfully from Key Chain")
         }
+        
+        let dataSession = DataSession.shared
+        dataSession.profileImageUrl = nil
+        dataSession.username = nil
+        
         self.performSegue(withIdentifier: "FeedToLogin", sender: nil)
     }
     
@@ -126,12 +130,15 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Private functions
     private func postToFirebase(imgUrl: String, caption: String) {
+        guard let owner = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser) else {return}
         let post: Dictionary<String, Any> = [
             "caption": caption,
             "imageUrl": imgUrl,
-            "likes": 0
+            "likes": 0,
+            "owner": owner
         ]
         DataService.shared.REF_DB_POSTS.childByAutoId().setValue(post)
+        
         
         // Clear properties
         captionField.text = ""

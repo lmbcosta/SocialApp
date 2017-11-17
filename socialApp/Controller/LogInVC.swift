@@ -42,7 +42,7 @@ class LogInVC: UIViewController {
                 print("SocialAppDebug: Facebook authenticated")
                 // Get credential to user firebase
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                // Authenticate with facebook using  facebook credential
+                // Authenticate firebase using facebook credential
                 self.firebaseAuth(credential)
             }
         }

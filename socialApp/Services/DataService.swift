@@ -50,7 +50,7 @@ class DataService {
     
     // Reference the current user
     var REF_DB_CURRENT_USER: DatabaseReference {
-        let uid = KeychainWrapper.standard.string(forKey: KEY_USER)
+        let uid = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser)
         let currentUserReference = _REF_DB_USERS.child(uid!)
         return currentUserReference
     }
@@ -75,9 +75,9 @@ class DataService {
         _REF_DB_POSTS.child(pid).updateChildValues(postData)
     }
     
-    func saveCurrentUserSettings(username: String, imageProfileUrl: String) {
+    func saveCurrentUserSettings(username: String, profileImageUrl: String) {
         // Save profileUrl in current user
-        REF_DB_CURRENT_USER.child("profileImage").setValue(imageProfileUrl)
+        REF_DB_CURRENT_USER.child("profileImage").setValue(profileImageUrl)
         // Save username in currentUser
         REF_DB_CURRENT_USER.child("username").setValue(username)
     }
