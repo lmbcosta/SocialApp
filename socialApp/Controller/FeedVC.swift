@@ -130,7 +130,10 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Private functions
     private func postToFirebase(imgUrl: String, caption: String) {
-        guard let owner = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser) else {return}
+        guard let owner = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser) else {
+            print("SocialAppDebug: Unable to get the current user uid")
+            return
+        }
         let post: Dictionary<String, Any> = [
             "caption": caption,
             "imageUrl": imgUrl,
