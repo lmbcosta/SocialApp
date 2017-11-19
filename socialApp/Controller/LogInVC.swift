@@ -78,7 +78,7 @@ class LogInVC: UIViewController {
                 print("SocialAppDebug: Successfully authenticated with Firebase using Email")
                 guard let user = user else {return}
                 self.saveOnKeyChain(uid: user.uid)
-                self.performSegue(withIdentifier: "LogintoFeed", sender: nil)
+                self.performSegue(withIdentifier: "LoginToFeed", sender: nil)
                 
             } else {
                 guard let error = error as NSError? else {return}

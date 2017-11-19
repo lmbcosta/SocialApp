@@ -133,23 +133,25 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate {
                         return
                     }
                     self.userNameTextField.text = username
+                    self.dataSession.username = username
                 } else {
-                    print("SocialApp: No such username to the current user")
+                    print("SocialAppDebug: No such username to the current user")
                     self.userNameTextField.text = ""
                 }
             })
             
             // Download profileImageUrl
-            DataService.shared.REF_DB_CURRENT_USER.observeSingleEvent(of: .value, with: { (snapshot) in
+            DataService.shared.REF_DB_CURRENT_USER.observeSingleEvent(of: .value, with: { snapshot in
                 if snapshot.hasChild("profileImage") {
                     guard let profileImageUrl = snapshot.childSnapshot(forPath: "profileImage").value as? String else {
-                        print("No such profileImageUrl to the current user")
+                        print("SocialAppDebug: No such profileImageUrl to the current user")
                         self.getCurrentUserSettings()
                         return
                     }
                     self.dataSession.profileImageUrl = profileImageUrl
+                    self.getCurrentUserSettings()
                 } else {
-                    print("SocialApp: No such profileImageUrl to the current user")
+                    print("SocialAppDebug: No such profileImageUrl to the current user")
                     self.profileImage.image = UIImage(named: USER_DEFAULT_IMAGE)
                     self.hasDefaultSettings = true
                 }
