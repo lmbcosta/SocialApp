@@ -36,6 +36,16 @@ class PostCell: UITableViewCell {
         numberOfLikesLabel.text = "\(post.likes)"
         postTextView.text = post.caption
         
+        // Get owner's username
+        DataService.shared.REF_DB_USERS.child(post.owner).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.hasChild("username") {
+                if let username = snapshot.childSnapshot(forPath: "username").value as? String {
+                    self.userNameLabel.text = username
+                }
+            }
+        }
+        
+        
         // If we have the image update otherwise download from the storage
         if let image = image {
             self.postImage.image = image

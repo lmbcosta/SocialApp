@@ -15,6 +15,7 @@ class Post {
     private var _likes: Int!
     private var _postKey: String!
     private var _postReference: DatabaseReference!
+    private var _owner: String!
     
     var caption: String {return _caption}
     
@@ -24,10 +25,13 @@ class Post {
     
     var postKey: String {return _postKey}
     
-    init(caption: String, imageUrl: String, likes: Int) {
+    var owner: String {return _owner}
+    
+    init(caption: String, imageUrl: String, likes: Int, owner: String) {
         self._caption = caption
         self._imageUrl = imageUrl
         self._likes = likes
+        self._owner = owner
     }
     
     init(postKey: String, postData: Dictionary<String, Any>) {
@@ -43,6 +47,10 @@ class Post {
         
         if let likes = postData["likes"] as? Int {
             self._likes = likes
+        }
+        
+        if let owner = postData["owner"] as? String {
+            self._owner = owner
         }
         
         _postReference = DataService.shared.REF_DB_POSTS.child(postKey)
