@@ -57,7 +57,7 @@ class LogInVC: UIViewController {
                 print("SocialAppDebug: Successfully authenticated with Firebase")
                 self.saveOnKeyChain(uid: user.uid)
                 self.createFirebaseUser(uid: user.uid, provider: credential.provider)
-                self.performSegue(withIdentifier: "LoginToFeed", sender: nil)
+                self.performSegue(withIdentifier: "LoginToSettings", sender: nil)
             }
         }
     }
