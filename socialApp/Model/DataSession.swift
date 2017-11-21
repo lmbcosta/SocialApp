@@ -32,4 +32,10 @@ class DataSession {
     private init() {
         _defaults = UserDefaults.standard
     }
+    
+    deinit {
+        // Delete data
+        _defaults.removeObject(forKey: _KEY_USERNAME)
+        _defaults.removeObject(forKey: _PROFILE_IMAGE_URL)
+    }
 }

@@ -16,22 +16,25 @@ class Post {
     private var _postKey: String!
     private var _postReference: DatabaseReference!
     private var _owner: String!
+    private var _username: String!
+    private var _profileImageUrl: String!
     
     var caption: String {return _caption}
-    
     var imageUrl: String {return _imageUrl}
-    
     var likes: Int {return _likes}
-    
     var postKey: String {return _postKey}
-    
     var owner: String {return _owner}
+    var profileImageUrl: String {return _profileImageUrl}
+    var username: String {return _username}
     
-    init(caption: String, imageUrl: String, likes: Int, owner: String) {
+    
+    init(caption: String, imageUrl: String, likes: Int, owner: String, profileImageUrl: String, username: String) {
         self._caption = caption
         self._imageUrl = imageUrl
         self._likes = likes
         self._owner = owner
+        self._profileImageUrl = profileImageUrl
+        self._username = username
     }
     
     init(postKey: String, postData: Dictionary<String, Any>) {
@@ -49,11 +52,13 @@ class Post {
             self._likes = likes
         }
         
-        if let owner = postData["owner"] as? String {
-            self._owner = owner
+        if let username = postData["username"] as? String {
+            self._username = username
         }
         
-        _postReference = DataService.shared.REF_DB_POSTS.child(postKey)
+        if let profileImageUrl = postData["profileImageUrl"] as? String {
+            self._profileImageUrl = profileImageUrl
+        }
     }
     
     func adjustLikes(addLike: Bool) {

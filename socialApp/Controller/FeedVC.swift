@@ -130,18 +130,29 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Private functions
     private func postToFirebase(imgUrl: String, caption: String) {
-        guard let owner = KeychainWrapper.standard.string(forKey: DataSession.shared.keyUser) else {
-            print("SocialAppDebug: Unable to get the current user uid")
+        
+        let dataSession = DataSession.shared
+        
+        // Get post owner
+        guard let username = dataSession.username else {
+            print("SocialAppDebug: Unable to get username from data session")
             return
         }
+        
+        // Get profileImageUrl
+        guard let profileImageUrl = dataSession.profileImageUrl else {
+            print("SocialAppDebug: Enable to get profile image url from data session")
+            return
+        }
+        
         let post: Dictionary<String, Any> = [
             "caption": caption,
             "imageUrl": imgUrl,
             "likes": 0,
-            "owner": owner
+            "username": username,
+            "profileImageUrl": profileImageUrl
         ]
         DataService.shared.REF_DB_POSTS.childByAutoId().setValue(post)
-        
         
         // Clear properties
         captionField.text = ""
@@ -152,7 +163,6 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         // Reload table view
         tableView.reloadData()
     }
-    
 }
 
 // MARK: - TableView DataSource
@@ -166,15 +176,19 @@ extension FeedVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostCell {
             let post = posts[indexPath.row]
-            // Check if image is in cache
-            if let image = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
-                print("Image alredy in cache")
-                cell.configureCell(post: post, image: image)
-            } else {
-                cell.configureCell(post: post)
+            let postImage = FeedVC.imageCache.object(forKey: (post.imageUrl as NSString))
+            if let _ = postImage {
+                print("SocialAppDebug: Post image already in cache")
             }
+            let profileImage = FeedVC.imageCache.object(forKey: (post.profileImageUrl as NSString))
+            if let _ = profileImage {
+                print("SocialAppDebug: Profile image already in cache")
+            }
+            cell.configureCell(post: post, postImage: postImage, profileImage: profileImage)
+    
             return cell
         }
         return UITableViewCell()

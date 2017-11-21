@@ -31,37 +31,50 @@ class PostCell: UITableViewCell {
         likeImage.isUserInteractionEnabled = true
     }
     
-    func configureCell(post: Post, image: UIImage? = nil) {
+    func configureCell(post: Post, postImage: UIImage? = nil, profileImage: UIImage? = nil) {
         self.post = post
         numberOfLikesLabel.text = "\(post.likes)"
         postTextView.text = post.caption
+        userNameLabel.text = post.username
+        let firebaseStorage = Storage.storage()
         
-        // Get owner's username
-        DataService.shared.REF_DB_USERS.child(post.owner).observeSingleEvent(of: .value) { snapshot in
-            if snapshot.hasChild("username") {
-                if let username = snapshot.childSnapshot(forPath: "username").value as? String {
-                    self.userNameLabel.text = username
+        // onwer's profile image
+        if let profileImage = profileImage {
+            self.userImage.image = profileImage
+        } else {
+            // Download profile image
+            let ref = firebaseStorage.reference(forURL: post.profileImageUrl)
+            ref.getData(maxSize: 1024 * 1024 * 2, completion: { (data, error) in
+                if error != nil {
+                    print("SocialApp: Unable to download profile Image")
+                } else {
+                    guard let data = data else {return}
+                    print("SocialApp: Profile Image downloaded successfully")
+                    if let profileImageDownloaded = UIImage(data: data) {
+                        self.userImage.image = profileImageDownloaded
+                        // image in cache
+                        FeedVC.imageCache.setObject(profileImageDownloaded, forKey: post.profileImageUrl as NSString)
+                    }
                 }
-            }
+            })
         }
         
-        
         // If we have the image update otherwise download from the storage
-        if let image = image {
-            self.postImage.image = image
+        if let postImage = postImage {
+            self.postImage.image = postImage
         } else {
-            let imageUrl = post.imageUrl
-            let ref = Storage.storage().reference(forURL: imageUrl)
-            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+            // Download post image
+            let ref = firebaseStorage.reference(forURL: post.imageUrl)
+            ref.getData(maxSize: 1024 * 1024 * 2, completion: { (data, error) in
                 if error != nil {
-                    print("SocialAppDebug: Unable to download image from Firebase storage")
+                    print("SocialApp: Unable to download post Image")
                 } else {
-                    print("SocialAppDebug: Image downloaded from Firebase storage")
                     guard let data = data else {return}
-                    if let img = UIImage(data: data) {
-                        // Save in cache and use as key image url
-                        FeedVC.imageCache.setObject(img, forKey: post.imageUrl as NSString)
-                        self.postImage.image = img
+                    print("SocialApp: Post Image downloaded successfully")
+                    if let postImageDownloaded = UIImage(data: data) {
+                        self.postImage.image = postImageDownloaded
+                        // image in cache
+                        FeedVC.imageCache.setObject(postImageDownloaded, forKey: post.imageUrl as NSString)
                     }
                 }
             })
@@ -94,6 +107,7 @@ class PostCell: UITableViewCell {
         }
     }
 }
+
 
 
 
