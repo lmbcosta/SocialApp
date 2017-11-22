@@ -20,6 +20,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate {
     let dataSession = DataSession.shared
     var hasDefaultSettings = false
     var hasChanged = false
+    let alertCenter = AlertCenterController.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +38,14 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate {
         // Check text field
         guard let username = userNameTextField.text, username != "" else {
             print("SocialAppDebug: Username is mandatory")
-            // TODO: Handle
+            alertCenter.createAlert(title: "Username", message: "Username is mandatory", vc: self)
             return
         }
         
         // Check profile image
         guard let profileImage = profileImage.image, !hasDefaultSettings else {
             print("SocialAppDebug: Profile picture is mandatory")
-            // TODO: Handle
+            alertCenter.createAlert(title: "Profile picture", message: "Profile picture is mandatory", vc: self)
             return
         }
         
@@ -52,9 +53,15 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate {
         // Save user info
         if hasChanged {
             saveCurrentUserSettings(username: username, profileImage: profileImage)
+            let alert = UIAlertController(title: "Success", message: "Current settings saved successfully", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel, handler: { (alert) in
+                self.performSegue(withIdentifier: "SettingsToFeed", sender: nil)
+            })
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.performSegue(withIdentifier: "SettingsToFeed", sender: nil)
         }
-        
-        self.performSegue(withIdentifier: "SettingsToFeed", sender: nil)
     }
     
     @IBAction func addProfileImage(_ sender: Any) {
@@ -81,9 +88,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate {
             // Upload
             DataService.shared.REF_STORAGE_PROFILE_IMAGES.child(imgUid).putData(imageData, metadata: metaData, completion: { (metaData, error) in
                 if error != nil {
-                    // TODO: Handle with alert
                     print("SocialAppDebug: Error uploading profile image")
-                    // TODO: Handle
                 } else {
                     print("SocialAppDebug: Image successfully uploaded")
                     if let downloadUrl = metaData?.downloadURL()?.absoluteString {

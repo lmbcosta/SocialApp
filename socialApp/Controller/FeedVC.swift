@@ -24,6 +24,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     // To only download the selected image on imagePicker
     // rather then phtologo we use a flag
     var isImageSelected = false
+    let alertCenter = AlertCenterController.shared
     
     // MARK: - View stages
     override func viewDidLoad() {
@@ -90,13 +91,13 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         
         guard let caption = captionField.text, caption != "" else {
             print("SocialAppDebug: A Caption must be entered")
-            // Handle with alert
+            alertCenter.createAlert(title: "Caption", message: "A Caption must be entered", vc: self)
             return
         }
         
         guard let image = imageAdder.image, isImageSelected else {
             print("SocialAppDebug: An image must be entered")
-            // Handle with alert
+            alertCenter.createAlert(title: "Post image", message: "A Post image must be entered", vc: self)
             return
         }
         

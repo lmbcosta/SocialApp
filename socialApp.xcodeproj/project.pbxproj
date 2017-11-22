@@ -11,6 +11,7 @@
 		490854501F93F0A90057A87B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4908544E1F93F0A90057A87B /* Main.storyboard */; };
 		490854551F93F0A90057A87B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 490854531F93F0A90057A87B /* LaunchScreen.storyboard */; };
 		49277AA41F93F60C00E8F886 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49277AA31F93F60C00E8F886 /* LogInVC.swift */; };
+		49518C2F1FC4EA22009DBE81 /* AlertCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49518C2E1FC4EA22009DBE81 /* AlertCenterController.swift */; };
 		4987CD8A1FA660C400A6887D /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4987CD891FA660C400A6887D /* PostCell.swift */; };
 		498AAD221FA651C300F506AD /* Shadowble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498AAD211FA651C300F506AD /* Shadowble.swift */; };
 		498E389B1FA5204500A7E19E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49FAA3A11FA51C3600FF9CBE /* GoogleService-Info.plist */; };
@@ -35,6 +36,7 @@
 		490854541F93F0A90057A87B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		490854561F93F0A90057A87B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49277AA31F93F60C00E8F886 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		49518C2E1FC4EA22009DBE81 /* AlertCenterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCenterController.swift; sourceTree = "<group>"; };
 		4987CD891FA660C400A6887D /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		498AAD211FA651C300F506AD /* Shadowble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadowble.swift; sourceTree = "<group>"; };
 		498E389C1FA5218100A7E19E /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				49923FAB1F99322F00AAF9A6 /* Constants.swift */,
+				49518C2E1FC4EA22009DBE81 /* AlertCenterController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				49979B101FA602CA00127B8E /* CircleImage.swift in Sources */,
 				49E4585A1FA7CCF900D463E4 /* DataService.swift in Sources */,
 				49979B141FA604BB00127B8E /* ShadowView.swift in Sources */,
+				49518C2F1FC4EA22009DBE81 /* AlertCenterController.swift in Sources */,
 				49923FA91F9931C100AAF9A6 /* HeaderSignInView.swift in Sources */,
 				4908544B1F93F0A90057A87B /* AppDelegate.swift in Sources */,
 				49923FAC1F99322F00AAF9A6 /* Constants.swift in Sources */,

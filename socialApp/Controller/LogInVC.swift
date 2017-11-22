@@ -18,7 +18,8 @@ class LogInVC: UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     
-
+    let alertCenter = AlertCenterController.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,11 +65,11 @@ class LogInVC: UIViewController {
     
     @IBAction func signInBtnPressed(_ sender: Any) {
         guard let email = emailTextField.text else {
-            createAlert(titleText: "Warning", messageText: "Email field is requied")
+            alertCenter.createAlert(title: "Email", message: "Email field is requied", vc: self)
             return
         }
         guard let password = passwordTextField.text else {
-            createAlert(titleText: "Warning", messageText: "Password field is manadatory")
+            alertCenter.createAlert(title: "Password", message: "Password field is manadatory", vc: self)
             return
         }
         
@@ -123,16 +124,6 @@ class LogInVC: UIViewController {
         }
     }
     
-    // Fuction to create an Authentication alerts
-    private func createAlert(titleText: String, messageText: String) {
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default) { (alterAction) in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     // Function to handle Firebase Authenticaton Erros
     private func handleFirebaseError(error: NSError) {
         let title = "Error"
@@ -163,7 +154,7 @@ class LogInVC: UIViewController {
             text = "There was an internal error. Please try later"
         }
         
-        createAlert(titleText: title, messageText: text)
+        alertCenter.createAlert(title: title, message: text, vc: self)
     }
     
     private func createFirebaseUser(uid: String, provider: String) {
